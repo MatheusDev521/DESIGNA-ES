@@ -470,7 +470,7 @@ label {
     cursor: pointer;
     transition: opacity .2s, transform .2s;
     white-space: nowrap;
-    background: #ce9300;
+    background: #6b7280;
     color: white;
     display: inline-flex;
     align-items: center;
@@ -486,6 +486,7 @@ label {
 #refazer:hover {
     transform: translateY(-2px);
     opacity: .9;
+    background: #4b5563;
 }
 
 /* ==========================
@@ -972,19 +973,36 @@ label {
         padding: 0 12px;
     }
 
-    #imprimir,
     #refazer {
-        font-size: 20px;
-        padding: 12px 20px;
+        font-size: 0.8rem;
+        padding: 10px 14px;
         flex: 1;
         justify-content: center;
+        align-items: center;
+        gap: 8px;
         min-width: 0;
+        white-space: normal;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    #imprimir {
+        font-size: 0.9rem;
+        padding: 10px 14px;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        min-width: 0;
+        white-space: normal;
+        line-height: 1.2;
+        text-align: center;
     }
 
     #imprimir svg,
     #refazer svg {
-        width: 32px;
-        height: 32px;
+        width: 26px;
+        height: 26px;
         flex-shrink: 0;
     }
 }
