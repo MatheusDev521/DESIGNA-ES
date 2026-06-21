@@ -717,6 +717,48 @@ label {
 }
 
 /* ==========================
+   CAIXA DE CARREGAMENTO
+========================== */
+
+.loading-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 253, 240, 0.92);
+    z-index: 9999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.loading-overlay.ativo {
+    display: flex;
+}
+
+.spinner {
+    width: 56px;
+    height: 56px;
+    border: 6px solid #f0d97a;
+    border-top-color: #ce9300;
+    border-radius: 50%;
+    animation: girar 0.8s linear infinite;
+}
+
+.loading-overlay p {
+    color: #ce9300;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+@keyframes girar {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ==========================
    RESPONSIVIDADE
 ========================== */
 

@@ -92,6 +92,20 @@ function atualizarInformativo() {
     p.classList.add("visivel");
 }
 
+// ============================================================
+// CAIXA DE CARREGAMENTO
+// ============================================================
+function mostrarLoading(texto = "Gerando arquivo, aguarde...") {
+    const overlay = document.getElementById("loadingOverlay");
+    if (!overlay) return;
+    overlay.querySelector("p").textContent = texto;
+    overlay.classList.add("ativo");
+}
+
+function escondiLoading() {
+    document.getElementById("loadingOverlay")?.classList.remove("ativo");
+}
+
 function registrarListeners(bloco) {
     bloco.querySelectorAll("input, select").forEach(el => {
         el.addEventListener("input", sincronizarDesignacoes);
@@ -148,6 +162,8 @@ async function compartilharDesignacao(blocoCard) {
     };
 
     try {
+        mostrarLoading("Gerando imagem...");
+
         const response = await fetch("https://designa-es-back-end.onrender.com/gerar-png", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -178,6 +194,8 @@ async function compartilharDesignacao(blocoCard) {
             alert("Não foi possível gerar a imagem. Verifique se o back-end está rodando.");
             console.error(err);
         }
+    } finally {
+        escondiLoading();
     }
 }
 
@@ -354,6 +372,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dadosFormulario.designacoes.some(d => !d.nome)) { alert("Preencha o nome em todas as designações."); return; }
 
         try {
+            mostrarLoading("Gerando PDF...");
+
             const response = await fetch("https://designa-es-back-end.onrender.com/gerar-pdf", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -379,6 +399,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (err) {
             alert("Não foi possível conectar ao servidor. Verifique se o back-end está rodando.");
             console.error(err);
+        } finally {
+            escondiLoading();
         }
     });
 
