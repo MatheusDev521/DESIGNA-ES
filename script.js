@@ -148,7 +148,7 @@ async function compartilharDesignacao(blocoCard) {
     };
 
     try {
-        const response = await fetch("http://localhost:5000/gerar-png", {
+        const response = await fetch("https://designa-es-back-end.onrender.com/gerar-png", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload)
@@ -354,7 +354,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (dadosFormulario.designacoes.some(d => !d.nome)) { alert("Preencha o nome em todas as designações."); return; }
 
         try {
-            const response = await fetch("http://localhost:5000/gerar-pdf", {
+            const response = await fetch("https://designa-es-back-end.onrender.com/gerar-pdf", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(dadosFormulario)
