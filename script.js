@@ -443,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("refazer").addEventListener("click", async (e) => {
         e.preventDefault();
 
-        const ok = await confirmarAcao("Tem certeza que deseja refazer? Todos os dados preenchidos serão perdidos.");
+        const ok = await confirmarAcao("Tem certeza que deseja Limpar todos os dados preenchidos?");
         if (!ok) return;
 
         document.getElementById("SemanaDesignacao").value = "";
