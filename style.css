@@ -1,0 +1,879 @@
+/* ==========================
+   RESET
+========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans", sans-serif;
+}
+
+/* ==========================
+   BODY
+========================== */
+
+body {
+    background: #fffdf0;
+    color: #333;
+    padding: 20px;
+}
+
+/* ==========================
+   CARD PAI — wrapper da semana
+========================== */
+
+h2 {
+    text-align: center;
+    color: #ce9300;
+    margin: 0 0 12px 0;
+    font-size: 1.4rem;
+}
+
+p {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+#atencao {
+    background: #ffe5e0;
+    border: 1px solid #e55a2b;
+    border-radius: 8px;
+    padding: 6px 18px;
+    margin: 0;
+}
+
+#atencao p:first-child {
+    color: #e55a2b;
+    font-size: 1.4rem;
+    margin: 6px 0 16px 0;
+}
+
+.semana-wrapper {
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(206, 147, 0, 0.18);
+    padding: 30px 30px 35px;
+    margin: 30px 0;
+    border: 2px solid #f0d97a;
+}
+
+/* Cabeçalho do card pai: data + locais lado a lado */
+.semana-header {
+    display: flex;
+    justify-content: center;
+    gap: 3%;
+    flex-wrap: wrap;
+    align-items: stretch;
+    padding-bottom: 28px;
+    margin: 20px 0;
+    border-bottom: 2px dashed #f0d97a;
+}
+
+#data {
+    display: flex;
+    flex-direction: column;
+}
+
+#data label {
+    color: #ce9300;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+#data input[type="date"] {
+    padding: 12px;
+    border: 1px solid #f0d97a;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: .3s;
+    width: 100%;
+}
+
+#data input[type="date"]:focus {
+    outline: none;
+    border-color: #ce9300;
+    box-shadow: 0 0 0 3px rgba(206, 147, 0, 0.2);
+}
+
+#data label {
+    align-self: flex-start;
+}
+
+#data input[type="date"] {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* ==========================
+   LOCAL DAS DESIGNAÇÕES
+========================== */
+
+.campo-semana-local {
+    padding: 22px 32px;
+    background: #fffbee;
+    border-radius: 10px;
+    border: 1px solid #f0d97a;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    box-sizing: border-box;
+}
+
+.titulo-local {
+    color: #ce9300;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.opcao-local {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+}
+
+.opcao-local label {
+    font-weight: normal;
+    font-size: 1rem;
+    margin-top: 0.5rem;
+}
+
+.opcao-local input[type="checkbox"] {
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    accent-color: #ce9300;
+}
+
+/* ==========================
+   INFORMATIVO PRÉVIO
+========================== */
+
+#InformativoPrevio {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    background: #fffbee;
+    border-left: 4px solid #ce9300;
+    border-radius: 8px;
+    padding: 12px 18px;
+    margin-bottom: 20px;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+    word-break: break-word;
+    white-space: normal;
+}
+
+#InformativoPrevio.visivel {
+    opacity: 1;
+    max-height: 120px;
+    padding: 12px 18px;
+}
+
+/* ==========================
+   ZONA DE CARDS FILHOS
+========================== */
+
+.designacoes-zona {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+    padding-right: 0;
+}
+
+/* ==========================
+   CONTAINER — posicionamento relativo para o efeito de reveal
+========================== */
+
+#container,
+.container-designacao {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    padding-right: 60px;
+    width: 100%;
+}
+
+.container-designacao .designacao {
+    width: 100%;
+    min-width: 0;
+}
+
+/* ==========================
+   BOTÕES — fundo visível no hover, revelados junto com o card
+========================== */
+
+#butoes,
+.butoes-clone {
+    position: absolute;
+    right: 0;
+    top: 30%;
+    width: 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+
+    opacity: 0;
+    transform: translateX(-10px);
+    pointer-events: none;
+
+    transition:
+        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    background: #fffbee;
+    border: 1px solid #f0d97a;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+    padding: 12px 6px;
+}
+
+#container:hover #butoes,
+.container-designacao:hover .butoes-clone {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+/* ==========================
+   TÍTULO
+========================== */
+
+.titulo {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    max-width: 100%;
+    width: fit-content;
+    margin: 0 auto 30px;
+    gap: 12px;
+    background: linear-gradient(135deg, #ce9300, #fcce5d);
+    color: white;
+    padding: 25px 30px;
+    box-shadow: 0 5px 15px rgba(206, 147, 0, 0.3);
+}
+
+.titulo h1 {
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+}
+
+.titulo p {
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+}
+
+img {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    vertical-align: middle;
+    margin: 0 12px 0 0;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.85));
+}
+
+/* ==========================
+   CARD DA DESIGNAÇÃO
+========================== */
+
+.designacao {
+    width: 100%;
+    min-width: 0;
+    background: #fffbee;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(206, 147, 0, 0.1);
+    border: 1px solid #f0d97a;
+    position: relative;
+    z-index: 1;
+}
+
+.designacao h3 {
+    text-align: center;
+    color: #ce9300;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+}
+
+/* ==========================
+   FORMULÁRIO
+========================== */
+
+.campo {
+    padding: 15px 18px;
+    margin: 20px -10px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #f0d97a;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    /* era 12px */
+}
+
+.campo label {
+    color: #ce9300;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.campo label+input+label {
+    margin-top: 24px;
+}
+
+.campo input,
+.campo select,
+input[type="text"],
+select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #f0d97a;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: .3s;
+    margin: 0;
+}
+
+.campo input:focus,
+.campo select:focus,
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #ce9300;
+    box-shadow: 0 0 0 3px rgba(206, 147, 0, 0.2);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* ==========================
+   TIPO DA PARTE
+========================== */
+
+.parte-container {
+    display: flex;
+    align-items: stretch;
+    margin-top: 4px;
+    /* era 8px */
+    margin-bottom: 4px;
+    /* era 20px */
+    gap: 10px;
+}
+
+.NumeroParte,
+#NumeroParte {
+    width: 48px;
+    min-width: 48px;
+    max-width: 48px;
+
+    height: 52px;
+
+    padding: 0;
+    margin: 0;
+
+    border: 1px solid #f0d97a;
+    border-radius: 8px;
+
+    background: white;
+    color: #ce9300;
+
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+
+    flex-shrink: 0;
+}
+
+#NumeroParte::placeholder,
+.NumeroParte::placeholder {
+    opacity: 0.5;
+}
+
+/* Remove setas no Chrome/Safari */
+.NumeroParte::-webkit-outer-spin-button,
+.NumeroParte::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.NumeroParte:focus,
+#NumeroParte:focus {
+    outline: none;
+    border-color: #ce9300;
+    box-shadow: 0 0 0 3px rgba(206, 147, 0, 0.2);
+}
+
+.parte-container select {
+    flex: 1;
+    min-width: 0;
+
+    height: 52px;
+    margin: 0;
+
+    padding: 0 12px;
+}
+
+/* ==========================
+   BOTÃO IMPRIMIR / REFAZER
+========================== */
+
+.imprimir-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+#imprimir {
+    border: none;
+    padding: 12px 26px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: opacity .2s, transform .2s;
+    white-space: nowrap;
+    background: #ce9300;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#imprimir svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+#imprimir:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
+
+#refazer {
+    border: none;
+    padding: 12px 26px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: opacity .2s, transform .2s;
+    white-space: nowrap;
+    background: #ce9300;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 0;
+}
+
+#refazer svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+#refazer:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
+
+/* ==========================
+   BOTÃO COMPARTILHAR
+========================== */
+
+#compartilhar {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+#compartilhar:hover {
+    transform: scale(1.15);
+}
+
+#compartilhar svg {
+    stroke: #0ea5e9;
+    fill: none;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+#compartilhar:hover svg {
+    fill: #bae6fd;
+    stroke: #0ea5e9;
+}
+
+#compartilhar:active svg {
+    stroke: #bae6fd;
+    fill: #0ea5e9;
+    transition: none;
+}
+
+/* ==========================
+   BOTÃO EXCLUIR (original)
+========================== */
+
+#excluir {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    border-radius: 0;
+    font-size: inherit;
+    white-space: normal;
+}
+
+#excluir svg {
+    stroke: #e55a2b;
+    fill: none;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+#excluir:hover {
+    transform: scale(1.15);
+}
+
+#excluir:hover svg {
+    fill: #fbb99e;
+    stroke: #e55a2b;
+}
+
+#excluir:active svg {
+    stroke: #fbb99e;
+    fill: #e55a2b;
+    transition: none;
+}
+
+/* ==========================
+   BOTÃO ADICIONAR (original)
+========================== */
+
+#adicionarParte {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+#adicionarParte:hover {
+    transform: scale(1.15);
+}
+
+#adicionarParte .sign,
+#adicionarParte .text {
+    display: none;
+}
+
+#adicionarParte svg {
+    stroke: #ce9300;
+    fill: none;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+#adicionarParte:hover svg {
+    fill: #fce9a0;
+    stroke: #ce9300;
+}
+
+#adicionarParte:active svg {
+    stroke: #fce9a0;
+    fill: #ce9300;
+    transition: none;
+}
+
+/* ==========================
+   BOTÕES DOS CARDS CLONADOS
+========================== */
+
+.btn-adicionar-clone {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.btn-adicionar-clone:hover {
+    transform: scale(1.15);
+}
+
+.btn-adicionar-clone .sign,
+.btn-adicionar-clone .text {
+    display: none;
+}
+
+.btn-adicionar-clone svg {
+    stroke: #ce9300;
+    fill: none;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.btn-adicionar-clone:hover svg {
+    fill: #fce9a0;
+    stroke: #ce9300;
+}
+
+.btn-adicionar-clone:active svg {
+    stroke: #fce9a0;
+    fill: #ce9300;
+    transition: none;
+}
+
+.btn-excluir-clone {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    border-radius: 0;
+}
+
+.btn-excluir-clone svg {
+    stroke: #e55a2b;
+    fill: none;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.btn-excluir-clone:hover {
+    transform: scale(1.15);
+}
+
+.btn-excluir-clone:hover svg {
+    fill: #fbb99e;
+    stroke: #e55a2b;
+}
+
+.btn-excluir-clone:active svg {
+    stroke: #fbb99e;
+    fill: #e55a2b;
+    transition: none;
+}
+
+.btn-compartilhar-clone {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.btn-compartilhar-clone:hover {
+    transform: scale(1.15);
+}
+
+.btn-compartilhar-clone svg {
+    stroke: #0ea5e9;
+    fill: none;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+}
+
+.btn-compartilhar-clone:hover svg {
+    fill: #bae6fd;
+    stroke: #0ea5e9;
+}
+
+.btn-compartilhar-clone:active svg {
+    stroke: #bae6fd;
+    fill: #0ea5e9;
+    transition: none;
+}
+
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 12px;
+    }
+
+    .titulo {
+        max-width: 100%;
+        width: 100%;
+        padding: 20px 16px;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding-left: 22px;
+    }
+
+    .titulo h1 {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+    }
+
+    img {
+        width: 54px;
+        height: 54px;
+        vertical-align: middle;
+        margin: 0 10px 0 0;
+    }
+
+    h2 {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+    }
+
+    p {
+        font-size: 1.1rem;
+        margin: 0 24px 16px 24px;
+        text-align: center;
+    }
+
+    .semana-wrapper {
+        padding: 16px 12px;
+    }
+
+    .semana-header {
+        flex-direction: column;
+        gap: 12px;
+        padding-bottom: 16px;
+        margin-bottom: 16px;
+    }
+
+    #data label,
+    #LocaldaParte label {
+        font-size: clamp(1.4rem, 5vw, 2rem);
+    }
+
+    #data label {
+        margin-bottom: 18px;
+    }
+
+    #labelLocaldaParte {
+        margin-bottom: 14px;
+    }
+
+    #data,
+    #LocaldaParte {
+        width: 100%;
+        padding: 20px 18px;
+    }
+
+    #InformativoPrevio {
+        font-size: 1.1rem;
+        max-height: 200px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .designacao {
+        padding: 16px;
+    }
+
+    .parte-container {
+        display: flex;
+        align-items: stretch;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+
+    #NumeroParte {
+        width: 54px;
+        min-width: 54px;
+        max-width: 54px;
+        height: 52px;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        font-size: 18px;
+    }
+
+    .parte-container select {
+        flex: 1;
+        min-width: 0;
+        height: 52px;
+        margin: 0;
+        padding: 0 12px;
+        font-size: clamp(1.1rem, 4vw, 1.1rem);
+    }
+
+    .designacoes-zona {
+        grid-template-columns: 1fr;
+    }
+
+    /* Botões do primeiro card e clones — visíveis e em linha */
+    #container,
+    .container-designacao {
+        flex-direction: column;
+        padding-right: 0;
+    }
+
+    #butoes,
+    .butoes-clone {
+        position: static;
+        flex-direction: row;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        margin-top: 12px;
+        border: none;
+        border-top: 1px solid #f0d97a;
+        border-radius: 0 0 12px 12px;
+        background: #fffbee;
+        width: 100%;
+        height: auto;
+        justify-content: center;
+        gap: 2rem;
+        padding: 12px 0;
+    }
+
+    .imprimir-wrapper {
+        gap: 10px;
+        padding: 0 12px;
+    }
+
+    #imprimir,
+    #refazer {
+        font-size: 20px;
+        padding: 12px 20px;
+        flex: 1;
+        justify-content: center;
+        min-width: 0;
+    }
+
+    #imprimir svg,
+    #refazer svg {
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+    }
+}

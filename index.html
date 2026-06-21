@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <script defer src="script.js"></script>
+    <title>Escola do Ministério Teocrático</title>
+</head>
+
+<body>
+    <div class="titulo">
+        <img src="https://i.pinimg.com/736x/ee/d2/26/eed226a648bb60b71f9aad520f174d3e.jpg" alt="logo">
+        <h1>FAÇA SEU MELHOR NO MINISTÉRIO</h1>
+    </div>
+    <p><strong>Aplicação criada para gerenciar as designações semanais dos participantes da sessão FAÇA SEU MELHOR NO MINISTÉRIO.</strong></p>
+
+    <div class="semana-wrapper">
+        <h2>RELAÇÃO SEMANAL DOS DESIGNADOS</h2>
+        <p>Selecione a data e o local das partes para gerar as designações.</p>
+        <div class="semana-header">
+            <div class="campo-semana-local" id="data">
+                <label for="SemanaDesignacao">📅 DATA DAS DESIGNAÇÕES</label>
+                <input type="date" id="SemanaDesignacao" name="SemanaDesignacao" required>
+            </div>
+
+            <div class="campo-semana-local" id="LocaldaParte">
+                <label class="titulo-local" id="labelLocaldaParte">📍LOCAL DAS DESIGNAÇÕES</label>
+                <div class="opcao-local">
+                    <input type="checkbox" id="principal">
+                    <label for="principal">Salão principal</label>
+                </div>
+                <div class="opcao-local">
+                    <input type="checkbox" id="salaB">
+                    <label for="salaB">Sala B</label>
+                </div>
+                <div class="opcao-local">
+                    <input type="checkbox" id="salaC">
+                    <label for="salaC">Sala C</label>
+                </div>
+            </div>
+        </div>
+
+        <div id="atencao">
+            <p><strong>ATENÇÃO</strong></p>
+            <p style="margin-top: -8px;">Todas as designações abaixo serão criadas de acordo com a <strong>data</strong> e o <strong>local</strong> selecionados acima.</p>
+        </div>
+        <br>
+        <p id="InformativoPrevio"></p>
+        <div class="designacoes-zona">
+            <div id="container">
+                <div class="designacao" id="designacao1">
+                    <h3>DESIGNAÇÃO</h3>
+                    <form>
+                        <div class="campo">
+                            <label for="nome">NOME:</label>
+                            <input type="text" id="nome" name="nome" placeholder="Nome do participante" required>
+                            <label for="ajudante">AJUDANTE:</label>
+                            <input type="text" id="ajudante" name="ajudante" placeholder="Nome do ajudante">
+                        </div>
+                        <div class="campo">
+                            <label for="parte">TIPO DA PARTE</label>
+                            <div class="parte-container">
+                                <input type="number" id="NumeroParte" class="NumeroParte" min="1" placeholder="Nº" required>
+                                <select id="parte" name="parte" required>
+                                    <option value="">Selecione...</option>
+                                    <option>Leitura da Bíblia</option>
+                                    <option>Iniciando conversas</option>
+                                    <option>Cultivando o interesse</option>
+                                    <option>Fazendo discípulos</option>
+                                    <option>Explicando suas crenças</option>
+                                    <option>Discurso</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div id="butoes">
+                    <!-- Adicionar -->
+                    <button id="adicionarParte" title="Adicionar Designação">
+                        <svg viewBox="0 0 24 24" height="50px" width="50px" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-width="1.5"
+                                d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                            </path>
+                            <path stroke-width="1.5" d="M8 12H16"></path>
+                            <path stroke-width="1.5" d="M12 16V8"></path>
+                        </svg>
+                    </button>
+                    <!-- Excluir -->
+                    <button id="excluir" title="Remover Designação">
+                        <svg viewBox="0 0 24 24" height="50px" width="50px" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-width="1.5"
+                                d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                            </path>
+                            <path stroke-width="1.5" d="M8 12H16"></path>
+                        </svg>
+                    </button>
+                    <!-- Compartilhar -->
+                    <button id="compartilhar" title="Compartilhar Designação">
+                        <svg viewBox="0 0 24 24" height="50px" width="50px" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="18" cy="5" r="3" stroke-width="1.5" />
+                            <circle cx="6" cy="12" r="3" stroke-width="1.5" />
+                            <circle cx="18" cy="19" r="3" stroke-width="1.5" />
+                            <path stroke-width="1.5" d="M8.59 13.51L15.42 17.49" />
+                            <path stroke-width="1.5" d="M15.41 6.51L8.59 10.49" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="imprimir-wrapper">
+        <button id="imprimir">
+            <svg fill="#ffff" version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 83.806 83.806"
+                stroke="#ffff" width="68px" height="46px">
+                <g>
+                    <path
+                        d="M73.908,13.162h-5.381V8.784c0-3.936-3.202-7.139-7.138-7.139H22.416c-3.937,0-7.139,3.203-7.139,7.139v4.378H9.898 C4.44,13.162,0,17.601,0,23.058v32.271c0,5.458,4.44,9.898,9.898,9.898h5.379v9.795c0,3.937,3.202,7.139,7.139,7.139h38.973 c3.936,0,7.138-3.202,7.138-7.139v-9.795h5.381c5.458,0,9.898-4.44,9.898-9.898v-32.27C83.806,17.602,79.366,13.162,73.908,13.162z M21.278,8.784c0-0.628,0.511-1.139,1.139-1.139H61.39c0.627,0,1.138,0.511,1.138,1.139v19.451c0,0.627-0.511,1.138-1.138,1.138 H22.416c-0.628,0-1.139-0.51-1.139-1.138V8.784H21.278z M62.527,75.023c0,0.628-0.511,1.139-1.138,1.139H22.416 c-0.628,0-1.139-0.511-1.139-1.139V56.882c0-0.628,0.511-1.139,1.139-1.139h38.973c0.627,0,1.138,0.511,1.138,1.139V75.023z M77.806,55.329c0,2.149-1.749,3.898-3.898,3.898h-5.381v-2.345c0-3.937-3.202-7.139-7.138-7.139H22.416 c-3.937,0-7.139,3.202-7.139,7.139v2.346H9.898C7.749,59.228,6,57.479,6,55.33V23.059c0-2.148,1.749-3.896,3.898-3.896h5.379v9.073 c0,3.936,3.202,7.138,7.139,7.138h38.973c3.936,0,7.138-3.202,7.138-7.138v-9.074h5.381c2.149,0,3.898,1.748,3.898,3.896V55.329z">
+                    </path>
+                    <rect x="26.5" y="58.852" width="30.882" height="6"></rect>
+                    <rect x="26.5" y="67.763" width="30.882" height="6"></rect>
+                </g>
+            </svg>
+            IMPRIMIR
+        </button>
+        <button id="refazer">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="46px" height="46px">
+                <path
+                    d="M21 12C21 16.9706 16.9706 21 12 21C9.69494 21 7.59227 20.1334 6 18.7083L3 16M3 12C3 7.02944 7.02944 3 12 3C14.3051 3 16.4077 3.86656 18 5.29168L21 8M3 21V16M3 16H8M21 3V8M21 8H16"
+                    stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                </path>
+            </svg>
+            REFAZER
+        </button>
+    </div>
+    <br>
+    <footer>
+        <p>&copy; 2026 Aplicação Web Desenvolvida na Congregação Cajazeiras 5</p>
+    </footer>
+</body>
+
+</html>
