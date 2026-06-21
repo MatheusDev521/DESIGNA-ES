@@ -106,6 +106,36 @@ function escondiLoading() {
     document.getElementById("loadingOverlay")?.classList.remove("ativo");
 }
 
+// ============================================================
+// CAIXA DE CONFIRMAÇÃO
+// ============================================================
+function confirmarAcao(mensagem) {
+    return new Promise((resolve) => {
+        const overlay = document.getElementById("confirmOverlay");
+        const texto = document.getElementById("confirmMensagem");
+        const btnConfirmar = document.getElementById("confirmConfirmar");
+        const btnCancelar = document.getElementById("confirmCancelar");
+
+        if (!overlay) { resolve(true); return; }
+
+        texto.textContent = mensagem;
+        overlay.classList.add("ativo");
+
+        function limpar(resultado) {
+            overlay.classList.remove("ativo");
+            btnConfirmar.removeEventListener("click", onConfirmar);
+            btnCancelar.removeEventListener("click", onCancelar);
+            resolve(resultado);
+        }
+
+        function onConfirmar() { limpar(true); }
+        function onCancelar() { limpar(false); }
+
+        btnConfirmar.addEventListener("click", onConfirmar);
+        btnCancelar.addEventListener("click", onCancelar);
+    });
+}
+
 function registrarListeners(bloco) {
     bloco.querySelectorAll("input, select").forEach(el => {
         el.addEventListener("input", sincronizarDesignacoes);
@@ -309,14 +339,20 @@ function adicionarDesignacao() {
 // ============================================================
 // EXCLUIR
 // ============================================================
-function excluirContainer(container) {
+async function excluirContainer(container) {
+    const ok = await confirmarAcao("Tem certeza que deseja remover esta designação?");
+    if (!ok) return;
+
     container.remove();
     sincronizarDesignacoes();
 }
 
-function excluirUltimaDesignacao() {
+async function excluirUltimaDesignacao() {
     const containers = document.querySelectorAll(".container-designacao");
     if (containers.length > 0) {
+        const ok = await confirmarAcao("Tem certeza que deseja remover esta designação?");
+        if (!ok) return;
+
         containers[containers.length - 1].remove();
         sincronizarDesignacoes();
         return;
@@ -404,8 +440,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    document.getElementById("refazer").addEventListener("click", (e) => {
+    document.getElementById("refazer").addEventListener("click", async (e) => {
         e.preventDefault();
+
+        const ok = await confirmarAcao("Tem certeza que deseja refazer? Todos os dados preenchidos serão perdidos.");
+        if (!ok) return;
 
         document.getElementById("SemanaDesignacao").value = "";
         ["principal", "salaB", "salaC"].forEach(id => {
