@@ -221,7 +221,7 @@ async function compartilharDesignacao(blocoCard) {
 
     } catch (err) {
         if (err.name !== "AbortError") {
-            alert("Não foi possível gerar a imagem. Verifique se o back-end está rodando.");
+            alert("ERRO DE CONEXÃO! TENTE NOVAMENTE...");
             console.error(err);
         }
     } finally {
@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
             URL.revokeObjectURL(url);
 
         } catch (err) {
-            alert("Não foi possível conectar ao servidor. Verifique se o back-end está rodando.");
+            alert("ERRO DE CONEXÃO! TENTE NOVAMENTE...");
             console.error(err);
         } finally {
             escondiLoading();
