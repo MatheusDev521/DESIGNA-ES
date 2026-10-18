@@ -829,6 +829,246 @@ label {
 }
 
 /* ==========================
+   BLOCOS SALVOS
+========================== */
+
+#salvosWrapper {
+    display: none;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(206, 147, 0, 0.18);
+    padding: 24px 30px 30px;
+    margin: 30px 0;
+    border: 2px solid #f0d97a;
+}
+
+#salvosWrapper #imprimir {
+    display: flex;
+    margin: 28px auto 0;
+}
+
+#blocosSalvos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 16px;
+    align-items: start;
+    padding-bottom: 24px;
+    border-bottom: 2px dashed #f0d97a;
+}
+
+#salvosWrapper.tem-blocos {
+    display: block;
+}
+
+#blocosSalvos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    align-items: start;
+}
+
+.bloco-salvo {
+    background: #fffbee;
+    border: 1px solid #f0d97a;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(206, 147, 0, 0.1);
+    overflow: hidden;
+}
+
+.bloco-salvo summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 14px 44px 14px 18px;
+    position: relative;
+}
+
+.bloco-salvo summary::-webkit-details-marker {
+    display: none;
+}
+
+.bloco-salvo summary::after {
+    content: "▾";
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ce9300;
+    font-size: 1.2rem;
+    transition: transform .2s;
+}
+
+.bloco-salvo[open] summary::after {
+    transform: translateY(-50%) rotate(180deg);
+}
+
+.bloco-data {
+    color: #ce9300;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.bloco-meta {
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.bloco-corpo {
+    padding: 0 18px 16px;
+    border-top: 1px dashed #f0d97a;
+}
+
+.bloco-corpo ul {
+    list-style: none;
+    margin: 12px 0;
+}
+
+.bloco-corpo li {
+    font-size: 0.95rem;
+    padding: 6px 0;
+    border-bottom: 1px solid #f6e9b0;
+    word-break: break-word;
+}
+
+.bloco-acoes {
+    display: flex;
+    gap: 10px;
+}
+
+.bloco-btn {
+    flex: 1;
+    border: none;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: opacity .2s, transform .2s;
+}
+
+.bloco-btn:hover {
+    opacity: .9;
+    transform: translateY(-1px);
+}
+
+.bloco-editar {
+    background: #fceaa0e5;
+    border: 1px solid #b98a00;
+    color: #b98500;
+}
+
+.bloco-excluir {
+    background: #e55a2b;
+    color: white;
+}
+
+/* Botão SALVAR (ainda não tinha estilo) */
+#salvar {
+    border: none;
+    padding: 12px 26px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: opacity .2s, transform .2s;
+    white-space: nowrap;
+    background: #2f855a;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#salvar:hover {
+    transform: translateY(-2px);
+    opacity: .9;
+}
+
+#salvar svg {
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Botão IMPRIMIR dentro do bloco das designações */
+.imprimir-bloco {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+    padding-top: 24px;
+    border-top: 2px dashed #f0d97a;
+}
+
+/* Botão de imprimir dos cards salvos — surge ao lado direito, como nos outros cards */
+.bloco-salvo-wrap {
+    position: relative;
+    padding-right: 60px;
+}
+
+.bloco-salvo-acoes {
+    position: absolute;
+    right: 0;
+    top: 14px;
+    width: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 6px;
+
+    opacity: 0;
+    transform: translateX(-10px);
+    pointer-events: none;
+
+    transition:
+        opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+
+    background: #fffbee;
+    border: 1px solid #f0d97a;
+    border-left: none;
+    border-radius: 0 12px 12px 0;
+}
+
+.bloco-salvo-wrap:hover .bloco-salvo-acoes {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+.btn-imprimir-bloco {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.btn-imprimir-bloco:hover {
+    transform: scale(1.15);
+}
+
+.btn-imprimir-bloco svg {
+    width: 36px;
+    height: 36px;
+    fill: #ce9300;
+    transition: fill 0.3s ease;
+}
+
+.btn-imprimir-bloco:hover svg {
+    fill: #fcce5d;
+}
+
+.btn-imprimir-bloco:active svg {
+    fill: #9a6f00;
+    transition: none;
+}
+
+/* ==========================
    RESPONSIVIDADE
 ========================== */
 
@@ -1004,5 +1244,45 @@ label {
         width: 26px;
         height: 26px;
         flex-shrink: 0;
+    }
+
+    #salvosWrapper {
+        padding: 16px 12px;
+    }
+
+    #salvar {
+        font-size: 0.8rem;
+        padding: 10px 14px;
+        flex: 1;
+        justify-content: center;
+        gap: 8px;
+        min-width: 0;
+        white-space: normal;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    #salvar svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    /* No celular não existe hover: o botão fica sempre visível, abaixo do card */
+    .bloco-salvo-wrap {
+        padding-right: 0;
+    }
+
+    .bloco-salvo-acoes {
+        position: static;
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        border: none;
+        border-top: 1px solid #f0d97a;
+        border-radius: 0 0 12px 12px;
+        padding: 10px 0;
     }
 }
