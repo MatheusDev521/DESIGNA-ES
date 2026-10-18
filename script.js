@@ -355,6 +355,13 @@ function criarBlocoSalvo(reg) {
 
     lateral.appendChild(btnImprimir);
     wrap.append(det, lateral);
+
+    // Mostra o botão de impressão somente quando o card estiver expandido
+    det.addEventListener("toggle", () => {
+        wrap.classList.toggle("expandido", det.open);
+    });
+
+    wrap.append(det, lateral);
     return wrap;
 }
 

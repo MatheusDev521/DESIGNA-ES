@@ -1268,21 +1268,29 @@ label {
     }
 
     /* No celular não existe hover: o botão fica sempre visível, abaixo do card */
+    /* No celular, o botão fica abaixo do card e oculto inicialmente */
     .bloco-salvo-wrap {
         padding-right: 0;
     }
 
     .bloco-salvo-acoes {
         position: static;
-        width: 100%;
+        width: fit-content;
+        margin: 8px auto;
+        display: none;
         flex-direction: row;
         justify-content: center;
+        align-items: center;
         opacity: 1;
         transform: none;
         pointer-events: auto;
-        border: none;
-        border-top: 1px solid #f0d97a;
-        border-radius: 0 0 12px 12px;
-        padding: 10px 0;
+        border: 2px solid #f0d97a;
+        border-radius: 12px;
+        padding: 4px 16px;
+    }
+
+    /* Exibe o botão quando o card estiver expandido */
+    .bloco-salvo-wrap:has(.bloco-salvo[open]) .bloco-salvo-acoes {
+        display: flex;
     }
 }
