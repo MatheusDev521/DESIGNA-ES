@@ -287,7 +287,12 @@ function criarBlocoSalvo(reg) {
     data.textContent = `📅 ${dia}/${mes}/${ano}`;
     const meta = document.createElement("span");
     meta.className = "bloco-meta";
-    meta.textContent = `${textoLocais(reg.locais)} · ${qtd} designaç${qtd === 1 ? "ão" : "ões"}`;
+    meta.textContent = `• ${textoLocais(reg.locais)}\n• Designaç${qtd === 1 ? "ão" : "ões"}: `;
+
+    const numero = document.createElement("strong");
+    numero.textContent = qtd;
+
+    meta.appendChild(numero);
     sum.append(data, meta);
 
     const corpo = document.createElement("div");
